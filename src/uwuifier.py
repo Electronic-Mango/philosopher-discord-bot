@@ -1,8 +1,8 @@
 from random import choice
-from unidecode import unidecode
 
 from owoify.owoify import owoify, Owoness
 from owoify.utility.mapping import FACES
+from unidecode import unidecode
 
 
 def uwuify(input: str) -> str:
