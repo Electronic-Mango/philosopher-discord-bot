@@ -1,7 +1,7 @@
 from logging import INFO, basicConfig, getLogger
 from os import getenv
 
-from discord.ext.commands import Bot, guild_only
+from discord.ext.commands import Bot, guild_only, has_guild_permissions
 from discord.ext.commands.context import Context
 from dotenv import load_dotenv
 
@@ -31,6 +31,7 @@ async def on_ready() -> None:
 
 @bot.command(name="philosophize", aliases=["all"])
 @guild_only()
+@has_guild_permissions(manage_webhooks=True)
 async def philosophize(context: Context) -> None:
     channel = context.channel
     context.command
