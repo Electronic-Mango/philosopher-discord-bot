@@ -5,12 +5,16 @@ from discord.ext.commands import Bot, guild_only
 from discord.ext.commands.context import Context
 from dotenv import load_dotenv
 
+from webhook import create_webhook, remove_webhook
+
 logger = getLogger("bot_main")
 basicConfig(format="[%(asctime)s] [%(name)s] [%(levelname)s] %(message)s", level=INFO)
 
 load_dotenv()
 DISCORD_BOT_TOKEN = getenv("DISCORD_BOT_TOKEN")
 COMMAND_PREFIX = getenv("COMMAND_PREFIX")
+
+STORED_CHANNELS = dict()
 
 bot = Bot(COMMAND_PREFIX)
 
@@ -29,8 +33,12 @@ async def on_ready() -> None:
 @guild_only()
 async def philosophize(context: Context) -> None:
     channel = context.channel
-    logger.info(f"[{channel.id}] handling 'philosophize' command")
-    await channel.send("Hello there!")
+    context.command
+    logger.info(f"[{channel.id}] handling [{context.command}] command")
+    if channel in STORED_CHANNELS:
+        await remove_webhook(context, STORED_CHANNELS)
+    else:
+        await create_webhook(context, STORED_CHANNELS)
 
 
 bot.run(DISCORD_BOT_TOKEN)
