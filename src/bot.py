@@ -4,6 +4,7 @@ from os import getenv
 from discord.ext.commands import Bot, guild_only, has_guild_permissions
 from discord.ext.commands.context import Context
 from discord.message import Message
+from discord.utils import escape_markdown
 from dotenv import load_dotenv
 
 from webhook import create_webhook, remove_webhook, send_message
@@ -72,7 +73,8 @@ async def philosophize_this(context: Context, *, text: str) -> None:
     context.command
     logger.info(f"[{channel.id}] [{context.command}] [{text}]")
     modified_text = uwuify(text)
-    await context.reply(modified_text)
+    escaped_modified_text = escape_markdown(modified_text)
+    await context.reply(escaped_modified_text)
 
 
 bot.run(DISCORD_BOT_TOKEN)
