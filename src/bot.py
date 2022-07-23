@@ -7,6 +7,7 @@ from discord.message import Message
 from dotenv import load_dotenv
 
 from webhook import create_webhook, remove_webhook, send_message
+from uwuifier import uwuify
 
 logger = getLogger("bot_main")
 basicConfig(format="[%(asctime)s] [%(name)s] [%(levelname)s] %(message)s", level=INFO)
@@ -45,7 +46,7 @@ async def on_message(message: Message) -> None:
     webhook = STORED_CHANNELS[message.channel]
     username = message.author.display_name
     avatar = message.author.avatar_url
-    content = message.content
+    content = uwuify(message.content)
     await send_message(channel_id, webhook, username, avatar, content)
 
 
