@@ -53,7 +53,7 @@ async def on_message(message: Message) -> None:
 
 @bot.command(name="philosophize", aliases=["all"])
 @guild_only()
-@has_guild_permissions(manage_webhooks=True)
+@has_guild_permissions(manage_messages=True, manage_webhooks=True)
 async def philosophize(context: Context) -> None:
     channel = context.channel
     context.command
