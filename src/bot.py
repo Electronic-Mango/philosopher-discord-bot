@@ -47,6 +47,7 @@ async def on_message(message: Message) -> None:
     username = message.author.display_name
     avatar = message.author.avatar_url
     content = uwuify(message.content)
+    await message.delete()
     await send_message(channel_id, webhook, username, avatar, content)
 
 
