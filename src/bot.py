@@ -43,8 +43,10 @@ async def on_message(message: Message) -> None:
     channel_id = message.channel.id
     logger.info(f"[{channel_id}] handling message of size [{len(message.content)}]")
     webhook = STORED_CHANNELS[message.channel]
-    content = "Hello there!"
-    await send_message(channel_id, webhook, content)
+    username = message.author.display_name
+    avatar = message.author.avatar_url
+    content = message.content
+    await send_message(channel_id, webhook, username, avatar, content)
 
 
 @bot.command(name="philosophize", aliases=["all"])

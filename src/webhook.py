@@ -1,6 +1,6 @@
 from logging import getLogger
 from os import getenv
-from discord import TextChannel, Webhook
+from discord import Asset, TextChannel, Webhook
 from discord.ext.commands.context import Context
 from dotenv import load_dotenv
 
@@ -28,6 +28,8 @@ async def remove_webhook(context: Context, channels_to_modify: dict[TextChannel,
     await context.send(WEBHOOK_REMOVED_RESPONSE)
 
 
-async def send_message(channel_id: int, webhook: Webhook, content: str) -> None:
-    logger.info(f"[{channel_id}] sending message through [{webhook}]")
-    await webhook.send(content=content)
+async def send_message(
+    channel_id: int, webhook: Webhook, username: str, avatar_url: Asset, content: str
+) -> None:
+    logger.info(f"[{channel_id}] sending message through [{webhook}] from [{username}]")
+    await webhook.send(username=username, avatar_url=avatar_url, content=content)
