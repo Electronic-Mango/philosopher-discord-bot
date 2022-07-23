@@ -73,15 +73,23 @@ async def philosophize_this(
 ) -> None:
     if text:
         await philosophize_text(context, text)
-    elif context.channel not in STORED_CHANNELS:
-        await philosophize_last(context)
-    else:
+    elif context.channel in STORED_CHANNELS:
         logger.info(f"[{context.channel.id}] [{context.command}] already modifying all messages")
+    elif context.message.reference and context.message.reference.resolved:
+        await philosophize_specific_message(context)
+    else:
+        await philosophize_last(context)
 
 
 async def philosophize_text(context: Context, text: str) -> None:
     logger.info(f"[{context.channel.id}] [{context.command}] [{text}]")
     await context.reply(prepare_text(text))
+
+
+async def philosophize_specific_message(context: Context) -> None:
+    message = context.message.reference.resolved
+    logger.info(f"[{context.channel.id}] [{context.command}] [{message.id}]")
+    await message.reply(prepare_text(message.content))
 
 
 async def philosophize_last(context: Context) -> None:
