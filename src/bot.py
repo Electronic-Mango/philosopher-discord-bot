@@ -1,3 +1,4 @@
+from itertools import dropwhile
 from logging import INFO, basicConfig, getLogger
 from os import getenv
 
@@ -47,10 +48,9 @@ async def on_message(message: Message) -> None:
     webhook = STORED_CHANNELS[message.channel]
     username = message.author.display_name
     avatar = message.author.avatar_url
-    content_without_markdown = remove_markdown(message.content)
-    modified_content = uwuify(content_without_markdown)
+    content = prepare_text(message.content)
     await message.delete()
-    await send_message(channel_id, webhook, username, avatar, modified_content)
+    await send_message(channel_id, webhook, username, avatar, content)
 
 
 @bot.command(name="philosophize", aliases=["all"])
@@ -69,13 +69,33 @@ async def philosophize(context: Context) -> None:
 
 
 @bot.command(name="philosophize_this", aliases=["this"])
-async def philosophize_this(context: Context, *, text: clean_content(remove_markdown=True)) -> None:
-    channel = context.channel
-    context.command
-    logger.info(f"[{channel.id}] [{context.command}] [{text}]")
-    modified_text = uwuify(text)
-    escaped_modified_text = escape_markdown(modified_text)
-    await context.reply(escaped_modified_text)
+async def philosophize_this(context: Context, *, text: clean_content(remove_markdown=True) = None) -> None:
+    if text:
+        await philosophize_text(context, text)
+    else:
+        await philosophize_last(context)
+
+
+async def philosophize_text(context: Context, text: str) -> None:
+    logger.info(f"[{context.channel.id}] [{context.command}] [{text}]")
+    await context.reply(prepare_text(text))
+
+
+async def philosophize_last(context: Context) -> None:
+    if context.channel in STORED_CHANNELS:
+        return
+    logger.info(f"[{context.channel.id}] [{context.command}] modifying previous message")
+    previous_messages = context.channel.history(before=context.message)
+    message = await anext(previous_messages)
+    while message.author == bot.user or (await bot.get_context(message)).valid:
+        message = await anext(previous_messages)
+    logger.info(f"[{context.channel.id}] [{context.command}] picked message [{message.id}]")
+    await message.reply(prepare_text(message.content))
+
+
+def prepare_text(text: str) -> str:
+    trimmed_text = remove_markdown(text)
+    return uwuify(trimmed_text)
 
 
 bot.run(DISCORD_BOT_TOKEN)
