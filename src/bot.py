@@ -1,11 +1,10 @@
-from itertools import dropwhile
 from logging import INFO, basicConfig, getLogger
 from os import getenv
 
 from discord.ext.commands import Bot, clean_content, guild_only, has_guild_permissions
 from discord.ext.commands.context import Context
 from discord.message import Message
-from discord.utils import escape_markdown, remove_markdown
+from discord.utils import remove_markdown
 from dotenv import load_dotenv
 
 from webhook import create_webhook, remove_webhook, send_message
@@ -35,7 +34,7 @@ async def on_ready() -> None:
 
 @bot.event
 async def on_message(message: Message) -> None:
-    if message.author == bot.user or message.webhook_id is not None:
+    if message.author == bot.user or message.webhook_id:
         return
     elif message.content.startswith(COMMAND_PREFIX):
         logger.info(f"[{message.channel.id}] moving to handling command [{message.content}]")
@@ -69,11 +68,15 @@ async def philosophize(context: Context) -> None:
 
 
 @bot.command(name="philosophize_this", aliases=["this"])
-async def philosophize_this(context: Context, *, text: clean_content(remove_markdown=True) = None) -> None:
+async def philosophize_this(
+    context: Context, *, text: clean_content(remove_markdown=True) = None
+) -> None:
     if text:
         await philosophize_text(context, text)
-    else:
+    elif context.channel not in STORED_CHANNELS:
         await philosophize_last(context)
+    else:
+        logger.info(f"[{context.channel.id}] [{context.command}] already modifying all messages")
 
 
 async def philosophize_text(context: Context, text: str) -> None:
@@ -82,15 +85,23 @@ async def philosophize_text(context: Context, text: str) -> None:
 
 
 async def philosophize_last(context: Context) -> None:
-    if context.channel in STORED_CHANNELS:
-        return
-    logger.info(f"[{context.channel.id}] [{context.command}] modifying previous message")
-    previous_messages = context.channel.history(before=context.message)
-    message = await anext(previous_messages)
-    while message.author == bot.user or (await bot.get_context(message)).valid:
-        message = await anext(previous_messages)
-    logger.info(f"[{context.channel.id}] [{context.command}] picked message [{message.id}]")
-    await message.reply(prepare_text(message.content))
+    channel_id = context.channel.id
+    command = context.command
+    logger.info(f"[{channel_id}] [{command}] modifying previous message")
+    message = await get_last_valid_message(context)
+    if not message:
+        logger.info(f"[{channel_id}] [{command}] no valid message to modify")
+    else:
+        logger.info(f"[{channel_id}] [{command}] picked message [{message.id}]")
+        await message.reply(prepare_text(message.content))
+
+
+async def get_last_valid_message(context: Context) -> Message:
+    async for message in context.channel.history(before=context.message):
+        command_context = await bot.get_context(message)
+        if message.author != bot.user and not message.webhook_id and not command_context.valid:
+            return message
+    return None
 
 
 def prepare_text(text: str) -> str:
