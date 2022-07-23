@@ -12,3 +12,7 @@ services:
       - WEBHOOK_REMOVED_RESPONSE='weaving mwessages as fay awe wike a-a bad bwot (⌯˃̶᷄ ﹏ ˂̶᷄⌯)ﾟ'
     env_file:
       - ./.env
+networks:
+  default:
+    name: philosopher-discord-bot-network
+    driver: bridge
