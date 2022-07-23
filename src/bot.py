@@ -1,10 +1,10 @@
 from logging import INFO, basicConfig, getLogger
 from os import getenv
 
-from discord.ext.commands import Bot, guild_only, has_guild_permissions
+from discord.ext.commands import Bot, clean_content, guild_only, has_guild_permissions
 from discord.ext.commands.context import Context
 from discord.message import Message
-from discord.utils import escape_markdown
+from discord.utils import escape_markdown, remove_markdown
 from dotenv import load_dotenv
 
 from webhook import create_webhook, remove_webhook, send_message
@@ -47,7 +47,8 @@ async def on_message(message: Message) -> None:
     webhook = STORED_CHANNELS[message.channel]
     username = message.author.display_name
     avatar = message.author.avatar_url
-    modified_content = uwuify(message.content)
+    content_without_markdown = remove_markdown(message.content)
+    modified_content = uwuify(content_without_markdown)
     await message.delete()
     await send_message(channel_id, webhook, username, avatar, modified_content)
 
@@ -68,7 +69,7 @@ async def philosophize(context: Context) -> None:
 
 
 @bot.command(name="philosophize_this", aliases=["this"])
-async def philosophize_this(context: Context, *, text: str) -> None:
+async def philosophize_this(context: Context, *, text: clean_content(remove_markdown=True)) -> None:
     channel = context.channel
     context.command
     logger.info(f"[{channel.id}] [{context.command}] [{text}]")
