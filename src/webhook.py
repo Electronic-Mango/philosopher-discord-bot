@@ -12,7 +12,7 @@ WEBHOOK_CREATED_RESPONSE = getenv("WEBHOOK_CREATED_RESPONSE")
 WEBHOOK_REMOVED_RESPONSE = getenv("WEBHOOK_REMOVED_RESPONSE")
 
 
-async def create_webhook(context: Context, channels_to_modify: dict[TextChannel, Webhook]) -> None:
+async def create_webhook(context: Context) -> Webhook:
     channel = context.channel
     webhook = await _get_existing_webhook(channel)
     if not webhook:
@@ -20,8 +20,8 @@ async def create_webhook(context: Context, channels_to_modify: dict[TextChannel,
         logger.info(f"[{channel.id}] added new webhook [{webhook}]")
     else:
         logger.info(f" [{channel.id}] using existing webhook [{webhook}]")
-    channels_to_modify[channel] = webhook
     await context.send(WEBHOOK_CREATED_RESPONSE)
+    return webhook
 
 
 async def _get_existing_webhook(channel: TextChannel) -> Webhook:
@@ -32,10 +32,9 @@ async def _get_existing_webhook(channel: TextChannel) -> Webhook:
     return None
 
 
-async def remove_webhook(context: Context, channels_to_modify: dict[TextChannel, Webhook]) -> None:
+async def remove_webhook(context: Context, webhook: Webhook) -> None:
     channel = context.channel
     logger.info(f"[{channel.id}] removing webhook")
-    webhook = channels_to_modify.pop(channel)
     await webhook.delete()
     await context.send(WEBHOOK_REMOVED_RESPONSE)
 

@@ -59,9 +59,11 @@ async def philosophize(context: Context) -> None:
     context.command
     logger.info(f"[{channel.id}] handling [{context.command}] command")
     if channel in STORED_CHANNELS:
-        await remove_webhook(context, STORED_CHANNELS)
+        webhook = STORED_CHANNELS.pop(channel)
+        await remove_webhook(context, webhook)
     else:
-        await create_webhook(context, STORED_CHANNELS)
+        webhook = await create_webhook(context)
+        STORED_CHANNELS[channel] = webhook
 
 
 bot.run(DISCORD_BOT_TOKEN)
