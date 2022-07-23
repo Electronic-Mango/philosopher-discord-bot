@@ -26,3 +26,8 @@ async def remove_webhook(context: Context, channels_to_modify: dict[TextChannel,
     webhook = channels_to_modify.pop(channel)
     await webhook.delete()
     await context.send(WEBHOOK_REMOVED_RESPONSE)
+
+
+async def send_message(channel_id: int, webhook: Webhook, content: str) -> None:
+    logger.info(f"[{channel_id}] sending message through [{webhook}]")
+    await webhook.send(content=content)

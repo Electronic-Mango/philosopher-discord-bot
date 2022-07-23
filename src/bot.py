@@ -6,7 +6,7 @@ from discord.ext.commands.context import Context
 from discord.message import Message
 from dotenv import load_dotenv
 
-from webhook import create_webhook, remove_webhook
+from webhook import create_webhook, remove_webhook, send_message
 
 logger = getLogger("bot_main")
 basicConfig(format="[%(asctime)s] [%(name)s] [%(levelname)s] %(message)s", level=INFO)
@@ -32,7 +32,7 @@ async def on_ready() -> None:
 
 @bot.event
 async def on_message(message: Message) -> None:
-    if message.author == bot.user:
+    if message.author == bot.user or message.webhook_id is not None:
         return
     elif message.content.startswith(COMMAND_PREFIX):
         logger.info(f"[{message.channel.id}] moving to handling command [{message.content}]")
@@ -40,7 +40,11 @@ async def on_message(message: Message) -> None:
         return
     elif message.channel not in STORED_CHANNELS:
         return
-    await message.reply("Hello!")
+    channel_id = message.channel.id
+    logger.info(f"[{channel_id}] handling message of size [{len(message.content)}]")
+    webhook = STORED_CHANNELS[message.channel]
+    content = "Hello there!"
+    await send_message(channel_id, webhook, content)
 
 
 @bot.command(name="philosophize", aliases=["all"])
