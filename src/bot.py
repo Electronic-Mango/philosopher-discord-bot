@@ -46,9 +46,9 @@ async def on_message(message: Message) -> None:
     webhook = STORED_CHANNELS[message.channel]
     username = message.author.display_name
     avatar = message.author.avatar_url
-    content = uwuify(message.content)
+    modified_content = uwuify(message.content)
     await message.delete()
-    await send_message(channel_id, webhook, username, avatar, content)
+    await send_message(channel_id, webhook, username, avatar, modified_content)
 
 
 @bot.command(name="philosophize", aliases=["all"])
@@ -57,13 +57,22 @@ async def on_message(message: Message) -> None:
 async def philosophize(context: Context) -> None:
     channel = context.channel
     context.command
-    logger.info(f"[{channel.id}] handling [{context.command}] command")
+    logger.info(f"[{channel.id}] [{context.command}]")
     if channel in STORED_CHANNELS:
         webhook = STORED_CHANNELS.pop(channel)
         await remove_webhook(context, webhook)
     else:
         webhook = await create_webhook(context)
         STORED_CHANNELS[channel] = webhook
+
+
+@bot.command(name="philosophize_this", aliases=["this"])
+async def philosophize_this(context: Context, *, text: str) -> None:
+    channel = context.channel
+    context.command
+    logger.info(f"[{channel.id}] [{context.command}] [{text}]")
+    modified_text = uwuify(text)
+    await context.reply(modified_text)
 
 
 bot.run(DISCORD_BOT_TOKEN)
