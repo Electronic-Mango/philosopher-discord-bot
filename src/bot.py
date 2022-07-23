@@ -29,7 +29,7 @@ async def on_ready() -> None:
     logger.info(f"[{bot.user}] ready")
 
 
-@bot.command(name="philosophize")
+@bot.command(name="philosophize", aliases=["all"])
 @guild_only()
 async def philosophize(context: Context) -> None:
     channel = context.channel
