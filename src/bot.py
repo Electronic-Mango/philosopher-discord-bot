@@ -3,6 +3,7 @@ from os import getenv
 
 from discord.ext.commands import Bot, guild_only, has_guild_permissions
 from discord.ext.commands.context import Context
+from discord.message import Message
 from dotenv import load_dotenv
 
 from webhook import create_webhook, remove_webhook
@@ -27,6 +28,19 @@ async def on_connect() -> None:
 @bot.event
 async def on_ready() -> None:
     logger.info(f"[{bot.user}] ready")
+
+
+@bot.event
+async def on_message(message: Message) -> None:
+    if message.author == bot.user:
+        return
+    elif message.content.startswith(COMMAND_PREFIX):
+        logger.info(f"[{message.channel.id}] moving to handling command [{message.content}]")
+        await bot.process_commands(message)
+        return
+    elif message.channel not in STORED_CHANNELS:
+        return
+    await message.reply("Hello!")
 
 
 @bot.command(name="philosophize", aliases=["all"])
