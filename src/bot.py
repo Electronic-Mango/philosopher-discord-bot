@@ -4,7 +4,7 @@ from os import getenv
 from discord.ext.commands import Bot, clean_content, guild_only, has_guild_permissions
 from discord.ext.commands.context import Context
 from discord.message import Message
-from discord.utils import remove_markdown
+from discord.utils import escape_markdown, remove_markdown
 from dotenv import load_dotenv
 
 from webhook import create_webhook, remove_webhook, send_message
@@ -114,7 +114,8 @@ async def get_last_valid_message(context: Context) -> Message:
 
 def prepare_text(text: str) -> str:
     trimmed_text = remove_markdown(text)
-    return uwuify(trimmed_text)
+    uwuified_text = uwuify(trimmed_text)
+    return escape_markdown(uwuified_text)
 
 
 bot.run(DISCORD_BOT_TOKEN)

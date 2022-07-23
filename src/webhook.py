@@ -3,7 +3,6 @@ from os import getenv
 
 from discord import Asset, TextChannel, Webhook
 from discord.ext.commands.context import Context
-from discord.utils import escape_markdown
 from dotenv import load_dotenv
 
 logger = getLogger(__name__)
@@ -45,5 +44,4 @@ async def send_message(
     channel_id: int, webhook: Webhook, username: str, avatar_url: Asset, content: str
 ) -> None:
     logger.info(f"[{channel_id}] sending message through [{webhook}] from [{username}]")
-    escaped_content = escape_markdown(content)
-    await webhook.send(username=username, avatar_url=avatar_url, content=escaped_content)
+    await webhook.send(username=username, avatar_url=avatar_url, content=content)
