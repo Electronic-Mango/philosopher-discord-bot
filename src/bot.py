@@ -73,8 +73,6 @@ async def philosophize_this(
 ) -> None:
     if text:
         await philosophize_text(context, text)
-    elif context.channel in STORED_CHANNELS:
-        logger.info(f"[{context.channel.id}] [{context.command}] already modifying all messages")
     elif context.message.reference and context.message.reference.resolved:
         await philosophize_specific_message(context)
     else:
@@ -107,7 +105,7 @@ async def philosophize_last(context: Context) -> None:
 async def get_last_valid_message(context: Context) -> Message:
     async for message in context.channel.history(before=context.message):
         command_context = await bot.get_context(message)
-        if message.author != bot.user and not message.webhook_id and not command_context.valid:
+        if message.author != bot.user and not command_context.valid:
             return message
     return None
 
