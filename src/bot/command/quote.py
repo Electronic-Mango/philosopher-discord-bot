@@ -10,5 +10,6 @@ class Quote(Cog, name="Inspirational quotes"):
 
     @command(name="quote", aliases=["uwuquote"])
     async def this(self, context: Context) -> None:
+        """Send random inspirational philosophy quote"""
         quote, author = get_quote()
         await context.reply(f"> {prepare_text(quote)}\n— {prepare_text(author)}")

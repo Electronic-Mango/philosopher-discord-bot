@@ -9,4 +9,5 @@ class This(Cog, name="Single message"):
 
     @command(name="this", aliases=["uwuthis"])
     async def this(self, context: Context, *, text: clean_content(remove_markdown=True)) -> None:
+        """Modify message given as an argument"""
         await context.reply(prepare_text(text))

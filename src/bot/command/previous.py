@@ -13,6 +13,7 @@ class Previous(Cog, name="Single message"):
 
     @command(name="previous", aliases=["prev", "uwuprevious", "uwuprev"])
     async def previous(self, context: Context) -> None:
+        """Modify previous message in channel"""
         channel_id = context.channel.id
         message = await self._get_last_valid_message(context)
         if not message:

@@ -11,6 +11,7 @@ class All(Cog, name="All messages"):
     @guild_only()
     @has_guild_permissions(manage_messages=True, manage_webhooks=True)
     async def all(self, context: Context) -> None:
+        """Toggle modification of all messages in current channel"""
         webhook = await get_webhook(context.channel)
         if webhook:
             await remove_webhook(context, webhook)

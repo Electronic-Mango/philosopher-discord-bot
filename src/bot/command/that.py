@@ -9,6 +9,7 @@ class That(Cog, name="Single message"):
 
     @command(name="that", aliases=["uwuthat"])
     async def that(self, context: Context) -> None:
+        """Improve message which this command replied to"""
         if context.message.reference and context.message.reference.resolved:
             message = context.message.reference.resolved
             await message.reply(prepare_text(message.content))
