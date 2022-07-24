@@ -20,7 +20,7 @@ async def create_webhook(context: Context) -> Webhook:
         webhook = await channel.create_webhook(name=WEBHOOK_NAME)
         logger.info(f"[{channel.id}] added new webhook [{webhook}]")
     else:
-        logger.info(f" [{channel.id}] using existing webhook [{webhook}]")
+        logger.info(f"[{channel.id}] using existing webhook [{webhook}]")
     await context.send(WEBHOOK_CREATED_RESPONSE)
     return webhook
 
