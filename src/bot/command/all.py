@@ -3,7 +3,7 @@ from discord.ext.commands import Bot, Cog, Context, command, guild_only, has_gui
 from bot.webhook import create_new_webhook, remove_webhook, get_webhook
 
 
-class All(Cog):
+class All(Cog, name="All messages"):
     def __init__(self, bot: Bot) -> None:
         self._bot = bot
 

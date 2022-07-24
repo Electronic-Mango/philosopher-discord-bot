@@ -3,7 +3,7 @@ from discord.ext.commands import Bot, Cog, Context, command
 from bot.prepare_text import prepare_text
 
 
-class That(Cog):
+class That(Cog, name="Single message"):
     def __init__(self, bot: Bot) -> None:
         self._bot = bot
 

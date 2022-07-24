@@ -4,7 +4,7 @@ from bot.prepare_text import prepare_text
 from quote import get_quote
 
 
-class Quote(Cog):
+class Quote(Cog, name="Inspirational quotes"):
     def __init__(self, bot: Bot) -> None:
         self._bot = bot
 
