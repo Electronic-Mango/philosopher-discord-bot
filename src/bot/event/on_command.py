@@ -10,7 +10,7 @@ class OnCommand(Cog):
 
     @Cog.listener()
     async def on_command(self, context: Context) -> None:
-        server = context.guild.name
+        server = context.guild.name if context.guild else context.guild
         channel = context.channel
         user = context.author
         command = context.command
