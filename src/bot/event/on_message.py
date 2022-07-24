@@ -14,7 +14,7 @@ class OnMessage(Cog):
 
     @Cog.listener()
     async def on_message(self, message: Message) -> None:
-        if message.author == self._bot.user or message.webhook_id:
+        if message.author == self._bot.user or message.webhook_id or not message.guild:
             return
         webhook = await get_webhook(message.channel)
         if not webhook:
