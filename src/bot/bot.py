@@ -1,3 +1,7 @@
+"""
+Module creating the bot, adding all required Cogs and running it.
+"""
+
 from os import getenv
 
 from discord.ext.commands import Bot
