@@ -1,3 +1,9 @@
+"""
+Event Cog handling all incoming messages.
+If webhook created by "all" command is present, then current message is removed
+and "improved" replacement is send with this user's name and avatar through the webhook.
+"""
+
 from logging import getLogger
 
 from discord.ext.commands import Bot, Cog

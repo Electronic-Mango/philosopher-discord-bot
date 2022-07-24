@@ -1,3 +1,7 @@
+"""
+Event Cog logging information that bot is ready to internal logger.
+"""
+
 from logging import getLogger
 
 from discord.ext.commands import Bot, Cog
