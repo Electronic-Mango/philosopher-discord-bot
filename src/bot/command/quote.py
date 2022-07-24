@@ -1,3 +1,7 @@
+"""
+Command Cog sending (improved) inspirational philosophy quote.
+"""
+
 from discord.ext.commands import Bot, Cog, Context, command
 
 from bot.prepare_text import prepare_text

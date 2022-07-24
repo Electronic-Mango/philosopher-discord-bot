@@ -1,3 +1,8 @@
+"""
+Command Cog improving previous message send in the channel.
+Commands or messages send by this bot are not taken into account.
+"""
+
 from logging import getLogger
 
 from discord.ext.commands import Bot, Cog, Context, command

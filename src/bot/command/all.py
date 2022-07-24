@@ -1,3 +1,10 @@
+"""
+Command cog enabling/disabling modification of all messages in this channel.
+This command only creates webhook which are used to send modified messages in "on_message" event.
+No modification itself happens here.
+Upon second call to this command, the webhook is removed.
+"""
+
 from discord.ext.commands import Bot, Cog, Context, command, guild_only, has_guild_permissions
 
 from bot.webhook import create_new_webhook, remove_webhook, get_webhook

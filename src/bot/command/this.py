@@ -1,3 +1,7 @@
+"""
+Command Cog improving text send as this command argument.
+"""
+
 from discord.ext.commands import Bot, Cog, Context, clean_content, command
 
 from bot.prepare_text import prepare_text

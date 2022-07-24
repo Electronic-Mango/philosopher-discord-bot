@@ -1,3 +1,8 @@
+"""
+Command Cog improving targeted message.
+Message to improve is a message which this command replies to.
+"""
+
 from discord.ext.commands import Bot, Cog, Context, command
 
 from bot.prepare_text import prepare_text
