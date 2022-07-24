@@ -10,6 +10,7 @@ and
 [owoify-py](https://github.com/deadshot465/owoify-py).
 
 
+## Table of contents
 - [Requirements](#requirements)
 - [Running the bot](#running-the-bot)
   - [From source](#from-source)
