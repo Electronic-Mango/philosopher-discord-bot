@@ -1,5 +1,6 @@
 # Uwuifier Discord Bot
 
+[![CodeQL](https://github.com/Electronic-Mango/philosopher-discord-bot/actions/workflows/codeql.yml/badge.svg)](https://github.com/Electronic-Mango/philosopher-discord-bot/actions/workflows/codeql.yml)
 [![Black](https://github.com/Electronic-Mango/philosopher-discord-bot/actions/workflows/black.yml/badge.svg)](https://github.com/Electronic-Mango/philosopher-discord-bot/actions/workflows/black.yml)
 [![Flake8](https://github.com/Electronic-Mango/philosopher-discord-bot/actions/workflows/flake8.yml/badge.svg)](https://github.com/Electronic-Mango/philosopher-discord-bot/actions/workflows/flake8.yml)
 
