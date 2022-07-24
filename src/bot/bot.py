@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 
 from bot.command.all import All
 from bot.command.previous import Previous
+from bot.command.quote import Quote
 from bot.command.that import That
 from bot.command.this import This
 from bot.event.on_connect import OnConnect
@@ -23,6 +24,7 @@ def run_bot() -> None:
     bot.add_cog(OnMessage(bot))
     bot.add_cog(All(bot))
     bot.add_cog(Previous(bot))
+    bot.add_cog(Quote(bot))
     bot.add_cog(That(bot))
     bot.add_cog(This(bot))
     bot.run(DISCORD_BOT_TOKEN)
