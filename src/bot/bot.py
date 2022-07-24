@@ -8,6 +8,7 @@ from bot.command.previous import Previous
 from bot.command.quote import Quote
 from bot.command.that import That
 from bot.command.this import This
+from bot.event.on_command import OnCommand
 from bot.event.on_connect import OnConnect
 from bot.event.on_message import OnMessage
 from bot.event.on_ready import OnReady
@@ -22,6 +23,7 @@ def run_bot() -> None:
     bot.add_cog(OnConnect(bot))
     bot.add_cog(OnReady(bot))
     bot.add_cog(OnMessage(bot))
+    bot.add_cog(OnCommand(bot))
     bot.add_cog(All(bot))
     bot.add_cog(Previous(bot))
     bot.add_cog(Quote(bot))

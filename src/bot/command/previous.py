@@ -14,13 +14,11 @@ class Previous(Cog):
     @command(name="previous", aliases=["prev", "uwuprevious", "uwuprev"])
     async def previous(self, context: Context) -> None:
         channel_id = context.channel.id
-        command = context.command
-        self._logger.info(f"[{channel_id}] [{command}] modifying previous message")
         message = await self._get_last_valid_message(context)
         if not message:
-            self._logger.info(f"[{channel_id}] [{command}] no valid message to modify")
+            self._logger.info(f"[{channel_id}] no valid message to modify")
         else:
-            self._logger.info(f"[{channel_id}] [{command}] picked message [{message.id}]")
+            self._logger.info(f"[{channel_id}] picked message [{message.id}]")
             await message.reply(prepare_text(message.content))
 
     async def _get_last_valid_message(self, context: Context) -> Message:

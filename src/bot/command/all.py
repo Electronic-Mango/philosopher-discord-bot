@@ -1,5 +1,3 @@
-from logging import getLogger
-
 from discord.ext.commands import Bot, Cog, Context, command, guild_only, has_guild_permissions
 
 from bot.webhook import create_new_webhook, remove_webhook, get_webhook
@@ -8,14 +6,11 @@ from bot.webhook import create_new_webhook, remove_webhook, get_webhook
 class All(Cog):
     def __init__(self, bot: Bot) -> None:
         self._bot = bot
-        self._logger = getLogger(__name__)
 
     @command(name="all", aliases=["uwuall"])
     @guild_only()
     @has_guild_permissions(manage_messages=True, manage_webhooks=True)
     async def all(self, context: Context) -> None:
-        channel = context.channel
-        self._logger.info(f"[{channel.id}] [{context.command}]")
         webhook = await get_webhook(context.channel)
         if webhook:
             await remove_webhook(context, webhook)
