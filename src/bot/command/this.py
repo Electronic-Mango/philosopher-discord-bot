@@ -10,7 +10,7 @@ class This(Cog):
         self._bot = bot
         self._logger = getLogger(__name__)
 
-    @command(name="this")
+    @command(name="this", aliases=["uwuthis"])
     async def this(
         self, context: Context, *, text: clean_content(remove_markdown=True) = None
     ) -> None:

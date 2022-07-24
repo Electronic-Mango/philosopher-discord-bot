@@ -11,7 +11,7 @@ class Previous(Cog):
         self._bot = bot
         self._logger = getLogger(__name__)
 
-    @command(name="previous", aliases=["prev"])
+    @command(name="previous", aliases=["prev", "uwuprevious", "uwuprev"])
     async def previous(self, context: Context) -> None:
         channel_id = context.channel.id
         command = context.command

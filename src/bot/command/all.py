@@ -11,7 +11,7 @@ class All(Cog):
         self._logger = getLogger(__name__)
         self._modified_channels = modified_channels
 
-    @command(name="all")
+    @command(name="all", aliases=["uwuall"])
     @guild_only()
     @has_guild_permissions(manage_messages=True, manage_webhooks=True)
     async def all(self, context: Context) -> None:

@@ -10,7 +10,7 @@ class That(Cog):
         self._bot = bot
         self._logger = getLogger(__name__)
 
-    @command(name="that")
+    @command(name="that", aliases=["uwuthat"])
     async def that(self, context: Context) -> None:
         if context.message.reference and context.message.reference.resolved:
             await self._modify_specific_message(context)
