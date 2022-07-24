@@ -21,7 +21,7 @@ def run_bot() -> None:
     bot = Bot(command_prefix=COMMAND_PREFIX)
     bot.add_cog(OnConnect(bot))
     bot.add_cog(OnReady(bot))
-    bot.add_cog(OnMessage(bot, MODIFIED_CHANNELS, COMMAND_PREFIX))
+    bot.add_cog(OnMessage(bot, MODIFIED_CHANNELS))
     bot.add_cog(All(bot, MODIFIED_CHANNELS))
     bot.add_cog(Previous(bot))
     bot.add_cog(That(bot))

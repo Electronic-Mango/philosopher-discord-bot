@@ -1,13 +1,13 @@
 from logging import getLogger
 
-from discord.ext.commands import Cog, Context, command
+from discord.ext.commands import Bot, Cog, Context, command
 from discord.message import Message
 
 from bot.prepare_text import prepare_text
 
 
 class Previous(Cog):
-    def __init__(self, bot):
+    def __init__(self, bot: Bot) -> None:
         self._bot = bot
         self._logger = getLogger(__name__)
 

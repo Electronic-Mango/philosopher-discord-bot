@@ -1,10 +1,10 @@
 from logging import getLogger
 
-from discord.ext.commands import Cog
+from discord.ext.commands import Bot, Cog
 
 
 class OnConnect(Cog):
-    def __init__(self, bot):
+    def __init__(self, bot: Bot) -> None:
         self._bot = bot
         self._logger = getLogger(__name__)
 

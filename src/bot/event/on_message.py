@@ -1,6 +1,8 @@
 from logging import getLogger
+from typing import Mapping
 
-from discord.ext.commands import Cog
+from discord import TextChannel, Webhook
+from discord.ext.commands import Bot, Cog
 from discord.message import Message
 
 from bot.prepare_text import prepare_text
@@ -8,11 +10,10 @@ from bot.webhook import send_message
 
 
 class OnMessage(Cog):
-    def __init__(self, bot, modified_channels, command_prefix):
+    def __init__(self, bot: Bot, modified_channels: Mapping[TextChannel, Webhook]) -> None:
         self._bot = bot
         self._logger = getLogger(__name__)
         self._modified_channels = modified_channels
-        self._command_prefix = command_prefix
 
     @Cog.listener()
     async def on_message(self, message: Message) -> None:
