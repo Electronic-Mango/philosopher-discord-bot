@@ -12,7 +12,7 @@ from unidecode import unidecode
 def uwuify(input: str) -> str:
     """
     Improve given strings with `owoify.owoify.owoify`
-    
+
     First all non-ASCII characters are removed.
     Then resulting text is send through `owoify.owoify.owoify` with maximum `owoify.owoify.Owoness`.
     Additionally, two `owoify.utility.mapping.FACES` are added surrounding resulting text.
