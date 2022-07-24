@@ -1,3 +1,7 @@
+# Basic docker-compose.yml running the project as docker container.
+# Configuration of needed parameters can be done via ./.env file.
+# This file isn't loaded into the image, just used as a source for environment variables.
+
 version: "3.9"
 services:
   philosopher-discord-bot:
