@@ -1,17 +1,14 @@
 from logging import getLogger
-from typing import Mapping
 
-from discord import TextChannel, Webhook
 from discord.ext.commands import Bot, Cog, Context, command, guild_only, has_guild_permissions
 
-from bot.webhook import create_webhook, remove_webhook
+from bot.webhook import create_new_webhook, remove_webhook, get_webhook
 
 
 class All(Cog):
-    def __init__(self, bot: Bot, modified_channels: Mapping[TextChannel, Webhook]) -> None:
+    def __init__(self, bot: Bot) -> None:
         self._bot = bot
         self._logger = getLogger(__name__)
-        self._modified_channels = modified_channels
 
     @command(name="all", aliases=["uwuall"])
     @guild_only()
@@ -19,9 +16,8 @@ class All(Cog):
     async def all(self, context: Context) -> None:
         channel = context.channel
         self._logger.info(f"[{channel.id}] [{context.command}]")
-        if channel in self._modified_channels:
-            webhook = self._modified_channels.pop(channel)
+        webhook = await get_webhook(context.channel)
+        if webhook:
             await remove_webhook(context, webhook)
         else:
-            webhook = await create_webhook(context)
-            self._modified_channels[channel] = webhook
+            await create_new_webhook(context)
