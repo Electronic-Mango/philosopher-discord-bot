@@ -5,11 +5,6 @@ services:
     build: .
     container_name: philosopher-discord-bot
     restart: unless-stopped
-    environment:
-      - COMMAND_PREFIX='!'
-      - WEBHOOK_NAME='uwu nyanis going on hewe'
-      - WEBHOOK_CREATED_RESPONSE='phiwowoswowophizing mwessages wike a-a gwowoowod bwowot (⑅˘꒳˘)'
-      - WEBHOOK_REMOVED_RESPONSE='weaving mwessages as fay awe wike a-a bad bwot (⌯˃̶᷄ ﹏ ˂̶᷄⌯)ﾟ'
     env_file:
       - ./.env
 networks:
