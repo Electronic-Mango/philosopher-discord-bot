@@ -4,10 +4,7 @@
 [![Black](https://github.com/Electronic-Mango/philosopher-discord-bot/actions/workflows/black.yml/badge.svg)](https://github.com/Electronic-Mango/philosopher-discord-bot/actions/workflows/black.yml)
 [![Flake8](https://github.com/Electronic-Mango/philosopher-discord-bot/actions/workflows/flake8.yml/badge.svg)](https://github.com/Electronic-Mango/philosopher-discord-bot/actions/workflows/flake8.yml)
 
-Bot uwuifiying your Discord conversations, built with
-[discord.py](https://github.com/Rapptz/discord.py)
-and
-[owoify-py](https://github.com/deadshot465/owoify-py).
+Bot uwuifiying your Discord conversations, built with [discord.py](https://github.com/Rapptz/discord.py) and [owoify-py](https://github.com/deadshot465/owoify-py).
 
 
 ## Table of contents
@@ -51,8 +48,7 @@ There's no need to rebuild the image.
 
 
 ### Supplying configuration variables
-The default way of supplying required configuration variables is through `.env` file,
-both when running from source, or via Docker.
+The default way of supplying required configuration variables is through `.env` file, both when running from source, or via Docker.
 
 However, you can also supply them via environment variables.
 Environment variables should take precedent over values in `.env`.
@@ -71,8 +67,7 @@ Environment variables should take precedent over values in `.env`.
 ### Uwuifying all messages
 Uwuifying all messages is done through a webhook.
 When `all` command is executed a webhook is added to the channel.
-Afterwards, when any message other than a command is send in this channel
-a uwuified version will be sent through this webhook.
+Afterwards, when any message other than a command is send in this channel a uwuified version will be sent through this webhook.
 This message will also have original author's name and avatar.
 Original message is removed.
 
@@ -83,8 +78,7 @@ This way bot will know which channel to uwuify even after it's restarted.
 
 ### Inspirational quotes
 You can supply your API source for inspirational quotes via `.env` file.
-You also need to specify via JSON key names which JSON values
-should be treated as quote text and which as quote author.
+You also need to specify via JSON key names which JSON values should be treated as quote text and which as quote author.
 
 
 ## Why?
