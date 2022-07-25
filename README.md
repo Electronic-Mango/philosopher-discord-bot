@@ -67,6 +67,7 @@ Environment variables should take precedent over values in `.env`.
 ### Uwuifying all messages
 Uwuifying all messages is done through a webhook.
 When `all` command is executed a webhook is added to the channel.
+This new webhook will have the same name and avatar as the bot.
 Afterwards, when any message other than a command is send in this channel a uwuified version will be sent through this webhook.
 This message will also have original author's name and avatar.
 Original message is removed.
