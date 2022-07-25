@@ -6,27 +6,30 @@ from logging import getLogger
 from os import getenv
 
 from discord import Asset, TextChannel, Webhook
+from discord.ext.commands import Bot
 from discord.ext.commands.context import Context
 from dotenv import load_dotenv
 
 logger = getLogger(__name__)
 
 load_dotenv()
-WEBHOOK_NAME = getenv("WEBHOOK_NAME")
 WEBHOOK_CREATED_RESPONSE = getenv("WEBHOOK_CREATED_RESPONSE")
 WEBHOOK_REMOVED_RESPONSE = getenv("WEBHOOK_REMOVED_RESPONSE")
 
 
-async def get_webhook(channel: TextChannel) -> Webhook:
+async def get_webhook(channel: TextChannel, bot: Bot) -> Webhook:
     """Get webhook used to improve all messages, or None"""
     webhooks = await channel.webhooks()
-    return next((webhook for webhook in webhooks if webhook.name == WEBHOOK_NAME), None)
+    return next((webhook for webhook in webhooks if webhook.name == bot.user.name), None)
 
 
 async def create_new_webhook(context: Context) -> Webhook:
     """Create a webhook which can be used to improve all messages"""
     channel = context.channel
-    webhook = await channel.create_webhook(name=WEBHOOK_NAME)
+    bot_user = context.bot.user
+    bot_name = bot_user.name
+    bot_avatar = await bot_user.avatar_url.read()
+    webhook = await channel.create_webhook(name=bot_name, avatar=bot_avatar)
     logger.info(f"[{channel.id}] added new webhook [{webhook}]")
     await context.reply(WEBHOOK_CREATED_RESPONSE)
     return webhook

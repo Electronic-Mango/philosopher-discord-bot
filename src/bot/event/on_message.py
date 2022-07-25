@@ -22,7 +22,7 @@ class OnMessage(Cog):
     async def on_message(self, message: Message) -> None:
         if message.author == self._bot.user or message.webhook_id or not message.guild:
             return
-        webhook = await get_webhook(message.channel)
+        webhook = await get_webhook(message.channel, self._bot)
         if not webhook:
             return
         channel_id = message.channel.id
