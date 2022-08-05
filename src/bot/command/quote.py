@@ -13,7 +13,7 @@ class Quote(Cog, name="Inspirational quotes"):
         self._bot = bot
 
     @command(name="quote", aliases=["uwuquote"])
-    async def this(self, context: Context) -> None:
+    async def quote(self, context: Context) -> None:
         """Send random inspirational quote"""
         quote, author = get_quote()
         await context.reply(f"> {prepare_text(quote)}\n— {prepare_text(author)}")
