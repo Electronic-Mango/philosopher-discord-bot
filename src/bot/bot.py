@@ -7,7 +7,6 @@ from os import getenv
 from disnake.ext.commands import Bot, when_mentioned
 
 from bot.command.all import All
-from bot.command.previous import Previous
 from bot.event.on_command import OnCommand
 from bot.event.on_connect import OnConnect
 from bot.event.on_message import OnMessage
@@ -28,7 +27,6 @@ def run_bot() -> None:
     bot.add_cog(OnMessage(bot))
     bot.add_cog(OnCommand(bot))
     bot.add_cog(All(bot))
-    bot.add_cog(Previous(bot))
     bot.add_cog(Quote())
     bot.add_cog(That())
     bot.add_cog(This())
