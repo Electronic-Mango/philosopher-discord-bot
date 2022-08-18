@@ -6,7 +6,7 @@ Finally all markdown characters are escaped.
 Some faces contain markdown characters, so the final step is necessary.
 """
 
-from discord.utils import escape_markdown, remove_markdown
+from disnake.utils import escape_markdown, remove_markdown
 
 from uwuifier import uwuify
 

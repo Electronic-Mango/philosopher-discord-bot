@@ -4,7 +4,7 @@
 [![Black](https://github.com/Electronic-Mango/philosopher-discord-bot/actions/workflows/black.yml/badge.svg)](https://github.com/Electronic-Mango/philosopher-discord-bot/actions/workflows/black.yml)
 [![Flake8](https://github.com/Electronic-Mango/philosopher-discord-bot/actions/workflows/flake8.yml/badge.svg)](https://github.com/Electronic-Mango/philosopher-discord-bot/actions/workflows/flake8.yml)
 
-Bot uwuifiying your Discord conversations, built with [discord.py](https://github.com/Rapptz/discord.py) and [owoify-py](https://github.com/deadshot465/owoify-py).
+Bot uwuifiying your Discord conversations, built with [disnake](https://github.com/DisnakeDev/disnake) and [owoify-py](https://github.com/deadshot465/owoify-py).
 
 
 ## Table of contents

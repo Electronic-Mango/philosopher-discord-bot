@@ -3,12 +3,12 @@ Command Cog improving targeted message.
 Message to improve is a message which this command replies to.
 """
 
-from discord.ext.commands import Bot, Cog, Context, command
+from disnake.ext.commands import Bot, Cog, Context, command
 
 from bot.prepare_text import prepare_text
 
 
-class That(Cog, name="Single message"):
+class That(Cog, name="Other message"):
     def __init__(self, bot: Bot) -> None:
         self._bot = bot
 

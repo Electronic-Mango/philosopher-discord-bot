@@ -7,7 +7,7 @@ Upon second call to this command, the webhook is removed.
 This command is only available in servers, since webhook is required to send modified message.
 """
 
-from discord.ext.commands import Bot, Cog, Context, command, guild_only, has_guild_permissions
+from disnake.ext.commands import Bot, Cog, Context, command, guild_only, has_guild_permissions
 
 from bot.webhook import create_new_webhook, remove_webhook, get_webhook
 

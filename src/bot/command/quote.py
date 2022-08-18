@@ -2,7 +2,7 @@
 Command Cog sending (improved) inspirational quotes.
 """
 
-from discord.ext.commands import Bot, Cog, Context, command
+from disnake.ext.commands import Bot, Cog, Context, command
 
 from bot.prepare_text import prepare_text
 from quote import get_quote

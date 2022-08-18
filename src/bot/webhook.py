@@ -5,9 +5,9 @@ Module responsible for handling webhooks related to improving all messages.
 from logging import getLogger
 from os import getenv
 
-from discord import Asset, TextChannel, Webhook
-from discord.ext.commands import Bot
-from discord.ext.commands.context import Context
+from disnake import Asset, TextChannel, Webhook
+from disnake.ext.commands import Bot
+from disnake.ext.commands.context import Context
 from dotenv import load_dotenv
 
 logger = getLogger(__name__)

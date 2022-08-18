@@ -4,7 +4,7 @@ Event Cog logging all command calls to internal logger.
 
 from logging import getLogger
 
-from discord.ext.commands import Bot, Cog, Context
+from disnake.ext.commands import Bot, Cog, Context
 
 
 class OnCommand(Cog):

@@ -5,13 +5,13 @@ Commands or messages send by this bot are not taken into account.
 
 from logging import getLogger
 
-from discord.ext.commands import Bot, Cog, Context, command
-from discord.message import Message
+from disnake.ext.commands import Bot, Cog, Context, command
+from disnake.message import Message
 
 from bot.prepare_text import prepare_text
 
 
-class Previous(Cog, name="Single message"):
+class Previous(Cog, name="Previous message"):
     def __init__(self, bot: Bot) -> None:
         self._bot = bot
         self._logger = getLogger(__name__)
