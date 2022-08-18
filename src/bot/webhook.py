@@ -8,11 +8,12 @@ from os import getenv
 from disnake import Asset, TextChannel, Webhook
 from disnake.ext.commands import Bot
 from disnake.ext.commands.context import Context
-from dotenv import load_dotenv
+
+from load_all_dotenv import load_all_dotenv
 
 logger = getLogger(__name__)
 
-load_dotenv()
+load_all_dotenv()
 WEBHOOK_CREATED_RESPONSE = getenv("WEBHOOK_CREATED_RESPONSE")
 WEBHOOK_REMOVED_RESPONSE = getenv("WEBHOOK_REMOVED_RESPONSE")
 

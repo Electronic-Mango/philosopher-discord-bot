@@ -5,7 +5,6 @@ Module creating the bot, adding all required Cogs and running it.
 from os import getenv
 
 from disnake.ext.commands import Bot, when_mentioned
-from dotenv import load_dotenv
 
 from bot.command.all import All
 from bot.command.previous import Previous
@@ -16,8 +15,9 @@ from bot.event.on_command import OnCommand
 from bot.event.on_connect import OnConnect
 from bot.event.on_message import OnMessage
 from bot.event.on_ready import OnReady
+from load_all_dotenv import load_all_dotenv
 
-load_dotenv()
+load_all_dotenv()
 DISCORD_BOT_TOKEN = getenv("DISCORD_BOT_TOKEN")
 
 

@@ -5,10 +5,11 @@ Module responsible for retrieving inspirational quotes, which are used in "quote
 from json import loads
 from os import getenv
 
-from dotenv import load_dotenv
 from requests import get
 
-load_dotenv()
+from load_all_dotenv import load_all_dotenv
+
+load_all_dotenv()
 QUOTE_API_URL = getenv("QUOTE_API_URL")
 QUOTE_API_TEXT_KEY = getenv("QUOTE_API_TEXT_KEY")
 QUOTE_API_AUTHOR_KEY = getenv("QUOTE_API_AUTHOR_KEY")
