@@ -8,11 +8,16 @@ from disnake.ext.commands import Cog, slash_command
 from bot.prepare_text import prepare_text
 from quote import get_quote
 
+_COMMAND_NAME = "quote"
+_COMMAND_DESCRIPTION = "Send back a random inspirational quote"
+HELP_MESSAGE = f"""
+`/{_COMMAND_NAME}` - {_COMMAND_DESCRIPTION}
+"""
+
 
 class Quote(Cog):
-    @slash_command(name="quote")
-    async def quote(self, interaction: CommandInteraction) -> None:
-        """Send a random inspirational quote"""
+    @slash_command(name=_COMMAND_NAME, description=_COMMAND_DESCRIPTION)
+    async def _quote(self, interaction: CommandInteraction) -> None:
         await interaction.response.defer()
         quote, author = get_quote()
         quote_text = f"> {prepare_text(quote)}\n— {prepare_text(author)}"

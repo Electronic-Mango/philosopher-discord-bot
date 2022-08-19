@@ -11,15 +11,20 @@ from disnake.message import Message
 
 from bot.prepare_text import prepare_text
 
+_COMMAND_NAME = "previous"
+_COMMAND_DESCRIPTION = "Modify previous message in current channel"
+HELP_MESSAGE = f"""
+`/{_COMMAND_NAME}` - {_COMMAND_DESCRIPTION}
+"""
+
 
 class Previous(Cog, name="Single message"):
     def __init__(self) -> None:
         super().__init__()
         self._logger = getLogger(__name__)
 
-    @slash_command(name="previous")
-    async def previous(self, interaction: CommandInteraction) -> None:
-        """Modify previous message in channel"""
+    @slash_command(name=_COMMAND_NAME, description=_COMMAND_DESCRIPTION)
+    async def _previous(self, interaction: CommandInteraction) -> None:
         await interaction.response.defer()
         channel_id = interaction.channel.id
         if not (message := await self._get_last_valid_message(interaction)):

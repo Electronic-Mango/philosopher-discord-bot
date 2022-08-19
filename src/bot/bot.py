@@ -13,6 +13,7 @@ from bot.event.on_message import OnMessage
 from bot.event.on_ready import OnReady
 from bot.message_command.that import That
 from bot.slash_command.all import All
+from bot.slash_command.help import Help
 from bot.slash_command.previous import Previous
 from bot.slash_command.quote import Quote
 from bot.slash_command.this import This
@@ -44,6 +45,7 @@ def _add_event_cogs(bot: InteractionBot) -> None:
 
 def _add_command_cogs(bot: InteractionBot) -> None:
     bot.add_cog(All())
+    bot.add_cog(Help())
     bot.add_cog(Previous())
     bot.add_cog(Quote())
     bot.add_cog(That())
