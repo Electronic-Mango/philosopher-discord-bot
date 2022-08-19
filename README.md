@@ -7,6 +7,7 @@
 Bot uwuifiying your Discord conversations, built with [disnake](https://github.com/DisnakeDev/disnake) and [owoify-py](https://github.com/deadshot465/owoify-py).
 
 
+
 ## Table of contents
 - [Requirements](#requirements)
 - [Running the bot](#running-the-bot)
@@ -14,14 +15,18 @@ Bot uwuifiying your Discord conversations, built with [disnake](https://github.c
   - [Docker](#docker)
   - [Supplying configuration variables](#supplying-configuration-variables)
 - [Commands](#commands)
+  - [Message context commands](#message-context-commands)
+  - [Slash commands](#slash-commands)
   - [Uwuifying all messages](#uwuifying-all-messages)
   - [Inspirational quotes](#inspirational-quotes)
 - [Why?](#why)
 
 
+
 ## Requirements
 This bot was built using `Python 3.10`.
 Full list of Python requirements is in `requirements.txt` file.
+
 
 
 ## Running the bot
@@ -54,14 +59,26 @@ However, you can also supply them via environment variables.
 Environment variables should take precedent over values in `.env`.
 
 
+
 ## Commands
 
-* `help` - prints help
-* `all` - uwuifies ALL messages sent in this channel (available onlu in servers)
-* `this` - uwuifies text given as an argument to this command
-* `previous` - uwuifies previous message in this channel (extept bot messages or other commands)
-* `that` - uwuifies message which this command replies to, allowing for "targeted" uwuification
-* `quote` - sends an inspirational uwuified quote
+
+### Message context command
+
+This command is available from the context menu of selected message.
+
+ * `uwuify this message` - uwuifies message which this command replies to, allowing for "targeted" uwuification
+
+
+### Slash commands
+
+These commands are available when you start typing `/`.
+
+ * `/help` - prints help message
+ * `/all` - uwuifies ALL messages sent in this channel (available onlu in servers and with relevant bot permissions)
+ * `/this <text to uwuify>` - uwuifies text given as an argument to this command
+ * `/previous` - uwuifies previous message in this channel (except this bot messages)
+ * `/quote` - sends an inspirational uwuified quote
 
 
 ### Uwuifying all messages
@@ -80,6 +97,7 @@ This way bot will know which channel to uwuify even after it's restarted.
 ### Inspirational quotes
 You can supply your API source for inspirational quotes via `.env` file.
 You also need to specify via JSON key names which JSON values should be treated as quote text and which as quote author.
+
 
 
 ## Why?
