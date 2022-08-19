@@ -7,7 +7,6 @@ from os import getenv
 
 from disnake import Asset, CommandInteraction, TextChannel, Webhook
 from disnake.ext.commands import Bot
-from disnake.ext.commands.context import Context
 
 from load_all_dotenv import load_all_dotenv
 
