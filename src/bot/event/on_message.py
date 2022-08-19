@@ -6,6 +6,7 @@ and "improved" replacement is send with this user's name and avatar through the 
 
 from logging import getLogger
 
+from disnake.abc import GuildChannel
 from disnake.ext.commands import Bot, Cog
 from disnake.message import Message
 
@@ -24,8 +25,7 @@ class OnMessage(Cog):
         # TODO "webhook_id" is also present for other bot commands.
         if not message.guild or message.author.id == self._bot.user.id or message.webhook_id:
             return
-        webhook = await get_webhook(message.channel, self._bot)
-        if not webhook:
+        if not (webhook := await self._try_get_webhook(message.channel)):
             return
         channel_id = message.channel.id
         self._logger.info(f"[{channel_id}] modifying message of size [{len(message.content)}]")
@@ -35,3 +35,9 @@ class OnMessage(Cog):
         content = prepare_text(message.content)
         await message.delete()
         await send_message(channel_id, webhook, username, avatar, content)
+
+    async def _try_get_webhook(self, channel: GuildChannel) -> None:
+        try:
+            return await get_webhook(channel, self._bot)
+        except:
+            return None
