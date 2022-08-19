@@ -33,6 +33,6 @@ class All(Cog):
             await create_new_webhook(interaction)
 
     @all.error
-    async def all_error(self, interaction: CommandInteraction, error) -> None:
+    async def _all_error(self, interaction: CommandInteraction, error) -> None:
         self._logger.warn(error)
         await interaction.send(content=error, ephemeral=True)
