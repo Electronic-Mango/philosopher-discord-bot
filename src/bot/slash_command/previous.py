@@ -6,7 +6,7 @@ Commands or messages send by this bot are not taken into account.
 from logging import getLogger
 
 from disnake import CommandInteraction
-from disnake.ext.commands import Cog, slash_command
+from disnake.ext.commands import Cog, InteractionBot, slash_command
 from disnake.message import Message
 
 from bot.prepare_text import prepare_text
@@ -19,8 +19,9 @@ HELP_MESSAGE = f"""
 
 
 class Previous(Cog, name="Single message"):
-    def __init__(self) -> None:
+    def __init__(self, bot: InteractionBot) -> None:
         super().__init__()
+        self._bot = bot
         self._logger = getLogger(__name__)
 
     @slash_command(name=_COMMAND_NAME, description=_COMMAND_DESCRIPTION)
@@ -36,6 +37,6 @@ class Previous(Cog, name="Single message"):
     async def _get_last_valid_message(self, interaction: CommandInteraction) -> Message:
         original_message = await interaction.original_message()
         async for message in interaction.channel.history(before=original_message):
-            if message.author != original_message.author and message.clean_content:
+            if message.author.id != self._bot.user.id and message.clean_content:
                 return message
         return None

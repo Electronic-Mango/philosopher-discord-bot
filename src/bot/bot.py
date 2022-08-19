@@ -46,7 +46,7 @@ def _add_event_cogs(bot: InteractionBot) -> None:
 def _add_command_cogs(bot: InteractionBot) -> None:
     bot.add_cog(All())
     bot.add_cog(Help())
-    bot.add_cog(Previous())
+    bot.add_cog(Previous(bot))
     bot.add_cog(Quote())
     bot.add_cog(That())
     bot.add_cog(This())
