@@ -11,14 +11,14 @@ Bot uwuifiying your Discord conversations, built with [disnake](https://github.c
 ## Table of contents
 - [Requirements](#requirements)
 - [Configuration](#configuration)
-- [Running the bot](#running-the-bot)
-  - [From source](#from-source)
-  - [Docker](#docker)
 - [Commands](#commands)
   - [Message context commands](#message-context-commands)
   - [Slash commands](#slash-commands)
   - [Uwuifying all messages](#uwuifying-all-messages)
   - [Inspirational quotes](#inspirational-quotes)
+- [Running the bot](#running-the-bot)
+  - [From source](#from-source)
+  - [Docker](#docker)
 - [Why?](#why)
 
 
@@ -42,30 +42,6 @@ All parameters can be overwritten by environment variables with the same name.
 
 Default `.env` also defines parameter `CUSTOM_DOTENV`, which is a path to a separate `custom.env` file.
 This custom file can also be used to overwrite values from the default one, without modifying project files.
-
-
-
-## Running the bot
-You can run the bot from source, or in a Docker container.
-
-
-### From source
-1. Create a Discord bot
-1. Install all packages from `requirements.txt`
-1. Fill `.env` or `custom.env` or other custom configuration file
-1. Execute `src/main.py` via Python
-
-
-### Docker
-1. Create a Discord bot
-1. Fill `.env`
-1. Run `docker compose up -d --build` in terminal
-
-You can skip `--build` flag if you didn't change the source code.
-
-`.env` is not added to the Docker image, just used as a source for environment variables.
-So if you make any changes there, just restart the container.
-There's no need to rebuild the image.
 
 
 
@@ -106,6 +82,30 @@ This way bot will know which channel to uwuify even after it's restarted.
 ### Inspirational quotes
 You can supply your API source for inspirational quotes via `.env` file.
 You also need to specify via JSON key names which JSON values should be treated as quote text and which as quote author.
+
+
+
+## Running the bot
+You can run the bot from source, or in a Docker container.
+
+
+### From source
+1. Create a Discord bot
+1. Install all packages from `requirements.txt`
+1. Fill `.env` or `custom.env` or other custom configuration file
+1. Execute `src/main.py` via Python
+
+
+### Docker
+1. Create a Discord bot
+1. Fill `.env`
+1. Run `docker compose up -d --build` in terminal
+
+You can skip `--build` flag if you didn't change the source code.
+
+`.env` is not added to the Docker image, just used as a source for environment variables.
+So if you make any changes there, just restart the container.
+There's no need to rebuild the image.
 
 
 
