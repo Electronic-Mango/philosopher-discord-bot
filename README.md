@@ -10,10 +10,10 @@ Bot uwuifiying your Discord conversations, built with [disnake](https://github.c
 
 ## Table of contents
 - [Requirements](#requirements)
+- [Configuration](#configuration)
 - [Running the bot](#running-the-bot)
   - [From source](#from-source)
   - [Docker](#docker)
-  - [Supplying configuration variables](#supplying-configuration-variables)
 - [Commands](#commands)
   - [Message context commands](#message-context-commands)
   - [Slash commands](#slash-commands)
@@ -29,6 +29,22 @@ Full list of Python requirements is in `requirements.txt` file.
 
 
 
+## Configuration
+
+Bot loads its configuration from `.env` files.
+Default `.env` file in the project root contains configuration parameters, all of which should be filled before the bot is started.
+Detailed description of each parameter is in the `.env` file itself.
+
+Although, technically, only `DISCORD_BOT_TOKEN` parameter needs to be provided with your Discord bot token for the bot to start.
+However, without other parameters bot might not behave as you'd expect.
+
+All parameters can be overwritten by environment variables with the same name.
+
+Default `.env` also defines parameter `CUSTOM_DOTENV`, which is a path to a separate `custom.env` file.
+This custom file can also be used to overwrite values from the default one, without modifying project files.
+
+
+
 ## Running the bot
 You can run the bot from source, or in a Docker container.
 
@@ -36,7 +52,7 @@ You can run the bot from source, or in a Docker container.
 ### From source
 1. Create a Discord bot
 1. Install all packages from `requirements.txt`
-1. Fill `.env`
+1. Fill `.env` or `custom.env` or other custom configuration file
 1. Execute `src/main.py` via Python
 
 
@@ -50,13 +66,6 @@ You can skip `--build` flag if you didn't change the source code.
 `.env` is not added to the Docker image, just used as a source for environment variables.
 So if you make any changes there, just restart the container.
 There's no need to rebuild the image.
-
-
-### Supplying configuration variables
-The default way of supplying required configuration variables is through `.env` file, both when running from source, or via Docker.
-
-However, you can also supply them via environment variables.
-Environment variables should take precedent over values in `.env`.
 
 
 
