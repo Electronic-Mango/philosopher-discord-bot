@@ -107,6 +107,11 @@ You can skip `--build` flag if you didn't change the source code.
 So if you make any changes there, just restart the container.
 There's no need to rebuild the image.
 
+You can supply a custom `.env` by modifying `docker-compose.yml` and:
+
+ * loading a custom `.env` file as a source of environment variables, just keep in mind that this file **MUST** exist
+ * configuring `CUSTOM_DOTENV` environment variable to point to some custom `.env` file in a mounted volume, this file can be missing from the container, it just won't be loaded
+
 
 
 ## Why?
