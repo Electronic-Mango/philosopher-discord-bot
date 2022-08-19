@@ -23,7 +23,8 @@ DISCORD_BOT_TOKEN = getenv("DISCORD_BOT_TOKEN")
 
 
 def run_bot() -> None:
-    intents = Intents().all()
+    intents = Intents().default()
+    intents.message_content = True
     bot = InteractionBot(intents=intents)
     bot.add_cog(OnConnect(bot))
     bot.add_cog(OnReady(bot))
