@@ -1,5 +1,5 @@
 """
-Event Cog logging all command calls to internal logger.
+Event Cog logging information about called command.
 """
 
 from logging import getLogger
@@ -14,8 +14,7 @@ class OnApplicationCommand(Cog):
 
     @Cog.listener()
     async def on_application_command(self, interaction: CommandInteraction) -> None:
-        server = interaction.guild.name if interaction.guild else None
-        channel = interaction.channel
+        source = f"[{interaction.guild}] [{interaction.channel}]" if interaction.guild else "[DM]"
         user = interaction.author
         command = interaction.application_command.qualified_name
-        self._logger.info(f"[{server}] [{channel}] [{user}] [{command}]")
+        self._logger.info(f"{source} [{user}] [{command}]")
