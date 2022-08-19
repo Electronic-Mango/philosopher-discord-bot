@@ -7,22 +7,21 @@ Upon second call to this command, the webhook is removed.
 This command is only available in servers, since webhook is required to send modified message.
 """
 
-from disnake.ext.commands import Bot, Cog, Context, command, guild_only, has_guild_permissions
+from disnake import CommandInteraction
+from disnake.ext.commands import Cog, slash_command, guild_only, has_guild_permissions
 
 from bot.webhook import create_new_webhook, remove_webhook, get_webhook
 
 
-class All(Cog, name="All messages"):
-    def __init__(self, bot: Bot) -> None:
-        self._bot = bot
-
-    @command(name="all", aliases=["uwuall"])
+class All(Cog):
+    @slash_command(name="all")
     @guild_only()
     @has_guild_permissions(manage_messages=True, manage_webhooks=True)
-    async def all(self, context: Context) -> None:
+    async def all(self, interaction: CommandInteraction) -> None:
         """Toggle modification of all messages in current channel"""
-        webhook = await get_webhook(context.channel, context.bot)
+        await interaction.response.defer()
+        webhook = await get_webhook(interaction.channel, interaction.bot)
         if webhook:
-            await remove_webhook(context, webhook)
+            await remove_webhook(interaction, webhook)
         else:
-            await create_new_webhook(context)
+            await create_new_webhook(interaction)

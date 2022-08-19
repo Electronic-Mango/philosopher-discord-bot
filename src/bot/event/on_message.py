@@ -20,15 +20,18 @@ class OnMessage(Cog):
 
     @Cog.listener()
     async def on_message(self, message: Message) -> None:
-        if message.author == self._bot.user or message.webhook_id or not message.guild:
+        # TODO "webhook_id" is also present for other bot commands.
+        # TODO comparing "author" with bot user probably doesn't work as intended.
+        if not message.guild or message.author == self._bot.user or message.webhook_id:
             return
         webhook = await get_webhook(message.channel, self._bot)
         if not webhook:
             return
         channel_id = message.channel.id
         self._logger.info(f"[{channel_id}] modifying message of size [{len(message.content)}]")
-        username = message.author.display_name
-        avatar = message.author.avatar_url
+        author = message.author
+        username = author.display_name
+        avatar = author.avatar or author.display_avatar or author.default_avatar
         content = prepare_text(message.content)
         await message.delete()
         await send_message(channel_id, webhook, username, avatar, content)
