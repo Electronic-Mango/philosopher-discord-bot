@@ -100,7 +100,7 @@ This command is available from the context menu of selected message.
 These commands are available when you start typing `/`.
 
  * `/help` - prints help message
- * `/all` - uwuifies ALL messages sent in this channel (available only in servers and with relevant bot permissions)
+ * `/all` - uwuifies ALL messages sent in this channel (**available only in servers and with relevant bot permissions**)
  * `/this <text to uwuify>` - uwuifies text given as an argument to this command
  * `/previous` - uwuifies previous message in this channel (except this bot messages)
  * `/quote` - sends an inspirational uwuified quote
@@ -118,6 +118,8 @@ Original message is removed.
 Decision whether to replace messages is done based on whether this webhook is present in channel.
 No persistent data is stored on bot side.
 This way bot will know which channel to uwuify even after it's restarted.
+
+**This functionality is only available in servers and with relevant permissions**.
 
 
 ### Inspirational quotes
