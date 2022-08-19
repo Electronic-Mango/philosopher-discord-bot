@@ -6,6 +6,7 @@ and "improved" replacement is send with this user's name and avatar through the 
 
 from logging import getLogger
 
+from disnake import Forbidden
 from disnake.abc import GuildChannel
 from disnake.ext.commands import Bot, Cog
 from disnake.message import Message
@@ -39,5 +40,5 @@ class OnMessage(Cog):
     async def _try_get_webhook(self, channel: GuildChannel) -> None:
         try:
             return await get_webhook(channel, self._bot)
-        except:
+        except Forbidden:
             return None
