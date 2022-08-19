@@ -22,8 +22,7 @@ class OnMessage(Cog):
     @Cog.listener()
     async def on_message(self, message: Message) -> None:
         # TODO "webhook_id" is also present for other bot commands.
-        # TODO comparing "author" with bot user probably doesn't work as intended.
-        if not message.guild or message.author == self._bot.user or message.webhook_id:
+        if not message.guild or message.author.id == self._bot.user.id or message.webhook_id:
             return
         webhook = await get_webhook(message.channel, self._bot)
         if not webhook:
