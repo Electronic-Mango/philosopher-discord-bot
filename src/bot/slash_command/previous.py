@@ -14,6 +14,7 @@ from bot.prepare_text import prepare_text
 
 class Previous(Cog, name="Single message"):
     def __init__(self) -> None:
+        super().__init__()
         self._logger = getLogger(__name__)
 
     @slash_command(name="previous")

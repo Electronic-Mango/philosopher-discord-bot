@@ -9,6 +9,7 @@ from disnake.ext.commands import Bot, Cog
 
 class OnReady(Cog):
     def __init__(self, bot: Bot) -> None:
+        super().__init__()
         self._bot = bot
         self._logger = getLogger(__name__)
 

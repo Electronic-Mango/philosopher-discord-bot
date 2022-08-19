@@ -15,6 +15,7 @@ from bot.webhook import send_message, get_webhook
 
 class OnMessage(Cog):
     def __init__(self, bot: Bot) -> None:
+        super().__init__()
         self._bot = bot
         self._logger = getLogger(__name__)
 

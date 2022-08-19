@@ -10,6 +10,7 @@ from disnake.ext.commands import Cog
 
 class OnApplicationCommand(Cog):
     def __init__(self) -> None:
+        super().__init__()
         self._logger = getLogger(__name__)
 
     @Cog.listener()
