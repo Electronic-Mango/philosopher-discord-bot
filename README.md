@@ -33,6 +33,7 @@ Full list of Python requirements is in `requirements.txt` file.
 
 Bot loads its configuration from `.env` files.
 Default `.env` file in the project root contains configuration parameters, all of which should be filled before the bot is started.
+Some parameters already have default values, which you can tweak further.
 Detailed description of each parameter is in the `.env` file itself.
 
 Although, technically, only `DISCORD_BOT_TOKEN` parameter needs to be provided with your Discord bot token for the bot to start.
