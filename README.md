@@ -37,19 +37,22 @@ Full list of Python requirements is in `requirements.txt` file.
 
 ## Configuration
 
-Bot loads its configuration from `.env` files.
-Default `.env` file in the project root contains configuration parameters.
+Bot loads its configuration from `default.env` files.
+This file in the project root contains configuration parameters.
 Some parameters already have default values, which you can tweak further.
-Detailed description of each parameter is in the `.env` file itself.
+Detailed description of each parameter is in the `default.env` file itself.
 
 Only `DISCORD_BOT_TOKEN` parameter needs to be provided with your Discord bot token for the bot to start.
 However, without other parameters bot might not behave as you'd expect, mostly `quote` command.
 
 All parameters can be overwritten by environment variables with the same name.
 
-Default `.env` also defines parameter `CUSTOM_DOTENV`, which is a path to a separate `custom.env` file.
+`default.env` also defines parameter `CUSTOM_DOTENV`, which is a path to a separate `custom.env` file.
 This custom file can also be used to overwrite values from the default one, without modifying project files.
 `CUSTOM_DOTENV` parameter might point to a missing file, then it will just be ignored.
+
+Just `.env` file in the project root can also be used for overwriting parameters.
+It will be treated with the highest priority of all `.env` files.
 
 
 
@@ -143,23 +146,26 @@ You can run the bot from source, or in a Docker container.
 
 1. Create a Discord bot
 1. Install all packages from `requirements.txt`
-1. Fill `.env` or `custom.env` or other custom configuration file
+1. Fill `default.env`, or `custom.env`, or `.env` or other custom configuration file
 1. Execute `src/main.py` via Python
 
 
 ### Docker
 
 1. Create a Discord bot
-1. Fill `.env`
+1. Fill `default.env` or `.env`
 1. Run `docker compose up -d --build` in terminal
 
 You can skip `--build` flag if you didn't change the source code.
 
-`.env` is not added to the Docker image, just used as a source for environment variables.
+No `.env` files are added to the Docker image, they are just used as a source for environment variables.
 So if you make any changes there, just restart the container.
 There's no need to rebuild the image.
 
-You can supply a custom `.env` by modifying `docker-compose.yml` and:
+Docker Compose will by default load parameters from just `.env` file with highest priority.
+So a file named exactly `.env` can also be used for source of parameters, without any changes to `docker-compose.yml` or other project files.
+
+You can also supply a custom `.env` by modifying `docker-compose.yml` and:
 
  * loading a custom `.env` file as a source of environment variables, just keep in mind that this file **MUST** exist
  * configuring `CUSTOM_DOTENV` environment variable to point to some custom `.env` file in a mounted volume, this file can be missing from the container, it just won't be loaded
