@@ -27,8 +27,7 @@ class All(Cog):
     async def all(self, interaction: CommandInteraction) -> None:
         """Toggle modification of all messages in current channel"""
         await interaction.response.defer()
-        webhook = await get_webhook(interaction.channel, interaction.bot)
-        if webhook:
+        if webhook := await get_webhook(interaction.channel, interaction.bot):
             await remove_webhook(interaction, webhook)
         else:
             await create_new_webhook(interaction)

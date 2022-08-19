@@ -22,8 +22,7 @@ class Previous(Cog, name="Single message"):
         """Modify previous message in channel"""
         await interaction.response.defer()
         channel_id = interaction.channel.id
-        message = await self._get_last_valid_message(interaction)
-        if not message:
+        if not (message := await self._get_last_valid_message(interaction)):
             self._logger.info(f"[{channel_id}] no valid message to modify")
         else:
             self._logger.info(f"[{channel_id}] picked message [{message.id}]")
