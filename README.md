@@ -9,6 +9,7 @@ Bot uwuifiying your Discord conversations, built with [disnake](https://github.c
 
 
 ## Table of contents
+
 - [Requirements](#requirements)
 - [Configuration](#configuration)
 - [Commands](#commands)
@@ -24,6 +25,7 @@ Bot uwuifiying your Discord conversations, built with [disnake](https://github.c
 
 
 ## Requirements
+
 This bot was built using `Python 3.10`.
 Full list of Python requirements is in `requirements.txt` file.
 
@@ -46,8 +48,45 @@ This custom file can also be used to overwrite values from the default one, with
 
 
 
-## Commands
+## Required bot permissions
 
+### Message content
+
+This bot requires **message content privileged gateway intent** to function correctly.
+This requirement comes from `previous` and `all` commands, which wouldn't be able to read message contents otherwise.
+
+You can enable this content for the whole bot in [Discord Developer Portal](https://discord.com/developers/applications) and specific bot settings.
+
+Currently bot won't even start without this privileged intent enabled.
+You can remove this requirement by modifying `src/bot/bot.py` file and its `_prepare_intents()` function.
+Currently this function creates `Intents` with message content privileged intent enabled:
+
+```python
+def _prepare_intents() -> Intents:
+    intents = Intents().default()
+    intents.message_content = True
+    return intents
+```
+
+You can modify it to return default `Intents` instead:
+
+```python
+def _prepare_intents() -> Intents:
+    return Intents().default()
+```
+
+**The bot will start, but `all` and `previous` commands won't function correctly.**
+
+
+### Managing webhooks and messages
+
+`all` command also required permissions to **modify channel webhooks** and **manage messages** to function correctly.
+
+Without these permissions bot will start, however `all` command will return an ephemeral message with information that permissions are missing.
+
+
+
+## Commands
 
 ### Message context command
 
@@ -61,13 +100,14 @@ This command is available from the context menu of selected message.
 These commands are available when you start typing `/`.
 
  * `/help` - prints help message
- * `/all` - uwuifies ALL messages sent in this channel (available onlu in servers and with relevant bot permissions)
+ * `/all` - uwuifies ALL messages sent in this channel (available only in servers and with relevant bot permissions)
  * `/this <text to uwuify>` - uwuifies text given as an argument to this command
  * `/previous` - uwuifies previous message in this channel (except this bot messages)
  * `/quote` - sends an inspirational uwuified quote
 
 
 ### Uwuifying all messages
+
 Uwuifying all messages is done through a webhook.
 When `all` command is executed a webhook is added to the channel.
 This new webhook will have the same name and avatar as the bot.
@@ -81,16 +121,19 @@ This way bot will know which channel to uwuify even after it's restarted.
 
 
 ### Inspirational quotes
+
 You can supply your API source for inspirational quotes via `.env` file.
 You also need to specify via JSON key names which JSON values should be treated as quote text and which as quote author.
 
 
 
 ## Running the bot
+
 You can run the bot from source, or in a Docker container.
 
 
 ### From source
+
 1. Create a Discord bot
 1. Install all packages from `requirements.txt`
 1. Fill `.env` or `custom.env` or other custom configuration file
@@ -98,6 +141,7 @@ You can run the bot from source, or in a Docker container.
 
 
 ### Docker
+
 1. Create a Discord bot
 1. Fill `.env`
 1. Run `docker compose up -d --build` in terminal
