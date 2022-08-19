@@ -10,10 +10,14 @@ Bot uwuifiying your Discord conversations, built with [disnake](https://github.c
 
 ## Table of contents
 
+- [Table of contents](#table-of-contents)
 - [Requirements](#requirements)
 - [Configuration](#configuration)
+- [Required bot permissions](#required-bot-permissions)
+  - [Message content](#message-content)
+  - [Managing webhooks and messages](#managing-webhooks-and-messages)
 - [Commands](#commands)
-  - [Message context commands](#message-context-commands)
+  - [Message context command](#message-context-command)
   - [Slash commands](#slash-commands)
   - [Uwuifying all messages](#uwuifying-all-messages)
   - [Inspirational quotes](#inspirational-quotes)
