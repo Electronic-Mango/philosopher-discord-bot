@@ -22,7 +22,7 @@ class Quote(Cog):
         quote, author = await get_quote()
         quote_text = self._prepare_response_text(quote, author)
         await interaction.send(quote_text)
-    
+
     def _prepare_response_text(self, quote: str, author: str) -> str:
         if not quote or not author:
             return prepare_text("Can't find any quotes")
