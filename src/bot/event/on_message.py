@@ -6,8 +6,7 @@ and "improved" replacement is send with this user's name and avatar through the 
 
 from logging import getLogger
 
-from disnake import Forbidden
-from disnake.abc import GuildChannel
+from disnake import Forbidden, Webhook
 from disnake.ext.commands import Bot, Cog
 from disnake.message import Message
 
@@ -23,22 +22,22 @@ class OnMessage(Cog):
 
     @Cog.listener()
     async def on_message(self, message: Message) -> None:
-        # TODO "webhook_id" is also present for other bot commands.
-        if not message.guild or message.author.id == self._bot.user.id or message.webhook_id:
-            return
-        if not (webhook := await self._try_get_webhook(message.channel)):
+        if not self._modifiable(message) or not (webhook := await self._try_get_webhook(message)):
             return
         channel_id = message.channel.id
         self._logger.info(f"[{channel_id}] modifying message of size [{len(message.content)}]")
         author = message.author
         username = author.display_name
         avatar = author.avatar or author.display_avatar or author.default_avatar
-        content = prepare_text(message.content)
+        new_content = prepare_text(message.content)
         await message.delete()
-        await send_message(channel_id, webhook, username, avatar, content)
+        await send_message(channel_id, webhook, username, avatar, new_content)
 
-    async def _try_get_webhook(self, channel: GuildChannel) -> None:
+    def _modifiable(self, message: Message) -> bool:
+        return message.guild and not message.webhook_id and message.author.id != self._bot.user.id
+
+    async def _try_get_webhook(self, message: Message) -> Webhook:
         try:
-            return await get_webhook(channel, self._bot)
+            return await get_webhook(message.channel, self._bot)
         except Forbidden:
             return None
