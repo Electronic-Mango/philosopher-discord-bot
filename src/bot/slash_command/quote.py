@@ -20,5 +20,11 @@ class Quote(Cog):
     async def _quote(self, interaction: CommandInteraction) -> None:
         await interaction.response.defer()
         quote, author = await get_quote()
-        quote_text = f"> {prepare_text(quote)}\n— {prepare_text(author)}"
+        quote_text = self._prepare_response_text(quote, author)
         await interaction.send(quote_text)
+    
+    def _prepare_response_text(self, quote: str, author: str) -> str:
+        if not quote or not author:
+            return prepare_text("Can't find any quotes")
+        else:
+            return f"> {prepare_text(quote)}\n— {prepare_text(author)}"
