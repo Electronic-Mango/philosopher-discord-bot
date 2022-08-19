@@ -24,15 +24,8 @@ DISCORD_BOT_TOKEN = getenv("DISCORD_BOT_TOKEN")
 
 def run_bot() -> None:
     bot = InteractionBot(intents=_prepare_intents())
-    bot.add_cog(OnConnect(bot))
-    bot.add_cog(OnReady(bot))
-    bot.add_cog(OnMessage(bot))
-    bot.add_cog(OnApplicationCommand())
-    bot.add_cog(All())
-    bot.add_cog(Previous())
-    bot.add_cog(Quote())
-    bot.add_cog(That())
-    bot.add_cog(This())
+    _add_event_cogs(bot)
+    _add_command_cogs(bot)
     bot.run(DISCORD_BOT_TOKEN)
 
 
@@ -40,3 +33,18 @@ def _prepare_intents() -> Intents:
     intents = Intents().default()
     intents.message_content = True
     return intents
+
+
+def _add_event_cogs(bot: InteractionBot) -> None:
+    bot.add_cog(OnConnect(bot))
+    bot.add_cog(OnReady(bot))
+    bot.add_cog(OnMessage(bot))
+    bot.add_cog(OnApplicationCommand())
+
+
+def _add_command_cogs(bot: InteractionBot) -> None:
+    bot.add_cog(All())
+    bot.add_cog(Previous())
+    bot.add_cog(Quote())
+    bot.add_cog(That())
+    bot.add_cog(This())
