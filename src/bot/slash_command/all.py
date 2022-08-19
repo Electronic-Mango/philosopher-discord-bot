@@ -8,14 +8,13 @@ This command is only available in servers, since webhook is required to send mod
 """
 
 from disnake import CommandInteraction
-from disnake.ext.commands import Cog, slash_command, guild_only, has_guild_permissions
+from disnake.ext.commands import Cog, slash_command, has_guild_permissions
 
 from bot.webhook import create_new_webhook, remove_webhook, get_webhook
 
 
 class All(Cog):
-    @slash_command(name="all")
-    @guild_only()
+    @slash_command(name="all", dm_permission=False)
     @has_guild_permissions(manage_messages=True, manage_webhooks=True)
     async def all(self, interaction: CommandInteraction) -> None:
         """Toggle modification of all messages in current channel"""
