@@ -4,7 +4,7 @@ Module responsible for retrieving inspirational quotes, which are used in "quote
 
 from os import getenv
 
-from requests import get
+from aiohttp import ClientSession
 
 from load_all_dotenv import load_all_dotenv
 
@@ -14,7 +14,9 @@ QUOTE_API_TEXT_KEY = getenv("QUOTE_API_TEXT_KEY")
 QUOTE_API_AUTHOR_KEY = getenv("QUOTE_API_AUTHOR_KEY")
 
 
-def get_quote() -> tuple[str, str]:
+async def get_quote() -> tuple[str, str]:
     """Returns "quote text" "quote author" tuple"""
-    response_json = get(QUOTE_API_URL).json()
-    return response_json[QUOTE_API_TEXT_KEY], response_json[QUOTE_API_AUTHOR_KEY]
+    async with ClientSession() as session:
+        async with session.get(QUOTE_API_URL) as response:
+            response_json = await response.json()
+            return response_json[QUOTE_API_TEXT_KEY], response_json[QUOTE_API_AUTHOR_KEY]

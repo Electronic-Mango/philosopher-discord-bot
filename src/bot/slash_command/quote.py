@@ -19,6 +19,6 @@ class Quote(Cog):
     @slash_command(name=_COMMAND_NAME, description=_COMMAND_DESCRIPTION)
     async def _quote(self, interaction: CommandInteraction) -> None:
         await interaction.response.defer()
-        quote, author = get_quote()
+        quote, author = await get_quote()
         quote_text = f"> {prepare_text(quote)}\n— {prepare_text(author)}"
         await interaction.send(quote_text)
