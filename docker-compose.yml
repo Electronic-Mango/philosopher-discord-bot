@@ -9,8 +9,7 @@ services:
     build: .
     container_name: philosopher-discord-bot
     restart: unless-stopped
-    env_file:
-      - ./.env
+    env_file: default.env
 networks:
   default:
     name: philosopher-discord-bot-network
