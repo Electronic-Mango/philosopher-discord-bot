@@ -10,6 +10,10 @@ services:
     container_name: philosopher-discord-bot
     restart: unless-stopped
     env_file: default.env
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
 networks:
   default:
     name: philosopher-discord-bot-network
