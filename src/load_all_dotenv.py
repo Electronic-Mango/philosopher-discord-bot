@@ -2,6 +2,7 @@
 Module loading default and custom .env.
 Path to custom .evn is taken from "CUSTOM_DOTENV" environment variable.
 """
+
 from os import getenv
 
 from dotenv import load_dotenv

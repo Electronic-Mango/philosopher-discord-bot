@@ -4,7 +4,7 @@ Module responsible for improving strings.
 
 from random import choice
 
-from owoify.owoify import owoify, Owoness
+from owoify.owoify import Owoness, owoify
 from owoify.utility.mapping import FACES
 from unidecode import unidecode
 

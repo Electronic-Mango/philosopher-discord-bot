@@ -11,10 +11,11 @@ it will send back an ephemeral error with this information.
 """
 
 from logging import getLogger
-from disnake import CommandInteraction
-from disnake.ext.commands import Cog, slash_command, bot_has_guild_permissions
 
-from bot.webhook import create_new_webhook, remove_webhook, get_webhook
+from disnake import CommandInteraction
+from disnake.ext.commands import Cog, bot_has_guild_permissions, slash_command
+
+from bot.webhook import create_new_webhook, get_webhook, remove_webhook
 
 _COMMAND_NAME = "all"
 _COMMAND_DESCRIPTION = "Toggle modification of all messages in current channel"

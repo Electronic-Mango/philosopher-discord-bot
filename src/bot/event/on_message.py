@@ -11,7 +11,7 @@ from disnake.ext.commands import Bot, Cog
 from disnake.message import Message
 
 from bot.prepare_text import prepare_text
-from bot.webhook import send_message, get_webhook
+from bot.webhook import get_webhook, send_message
 
 
 class OnMessage(Cog):
