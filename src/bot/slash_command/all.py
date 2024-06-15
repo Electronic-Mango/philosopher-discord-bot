@@ -40,5 +40,5 @@ class All(Cog):
 
     @_all.error
     async def _all_error(self, interaction: CommandInteraction, error) -> None:
-        self._logger.warn(error)
+        self._logger.warning(error)
         await interaction.send(content=error, ephemeral=True)
