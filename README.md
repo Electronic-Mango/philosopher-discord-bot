@@ -30,7 +30,7 @@ Bot uwuifiying your Discord conversations, built with [disnake](https://github.c
 
 ## Requirements
 
-This bot was built using `Python 3.10`.
+This bot was built using `Python 3.12`.
 Full list of Python requirements is in `requirements.txt` file.
 
 
