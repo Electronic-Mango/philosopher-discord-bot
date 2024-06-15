@@ -14,7 +14,7 @@ QUOTE_API_TEXT_KEY = getenv("QUOTE_API_TEXT_KEY")
 QUOTE_API_AUTHOR_KEY = getenv("QUOTE_API_AUTHOR_KEY")
 
 
-async def get_quote() -> tuple[str, str]:
+async def get_quote() -> tuple[str | None, str | None]:
     """Returns "quote text" "quote author" tuple"""
     if not QUOTE_API_URL or not QUOTE_API_TEXT_KEY or not QUOTE_API_AUTHOR_KEY:
         return None, None

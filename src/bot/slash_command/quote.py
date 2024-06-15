@@ -6,7 +6,7 @@ from disnake import CommandInteraction
 from disnake.ext.commands import Cog, slash_command
 
 from bot.prepare_text import prepare_text
-from quote import get_quote
+from quote_getter import get_quote
 
 _COMMAND_NAME = "quote"
 _COMMAND_DESCRIPTION = "Send back a random inspirational quote"
@@ -23,7 +23,7 @@ class Quote(Cog):
         quote_text = self._prepare_response_text(quote, author)
         await interaction.send(quote_text)
 
-    def _prepare_response_text(self, quote: str, author: str) -> str:
+    def _prepare_response_text(self, quote: str | None, author: str | None) -> str:
         if not quote or not author:
             return prepare_text("Can't find any quotes")
         else:

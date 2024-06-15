@@ -14,7 +14,7 @@ def uwuify(input: str) -> str:
     Improve given strings with `owoify.owoify.owoify`
 
     First all non-ASCII characters are removed.
-    Then resulting text is send through `owoify.owoify.owoify` with maximum `owoify.owoify.Owoness`.
+    Then resulting text is sent through `owoify.owoify.owoify` with maximum `owoify.owoify.Owoness`.
     Additionally, two `owoify.utility.mapping.FACES` are added surrounding resulting text.
     """
     normalized_input = unidecode(input)

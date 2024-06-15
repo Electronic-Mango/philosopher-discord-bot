@@ -65,9 +65,9 @@ This requirement comes from `previous` and `all` commands, which wouldn't be abl
 
 You can enable this content for the whole bot in [Discord Developer Portal](https://discord.com/developers/applications) and specific bot settings.
 
-Currently bot won't even start without this privileged intent enabled.
+Currently, bot won't even start without this privileged intent enabled.
 You can remove this requirement by modifying `src/bot/bot.py` file and its `_prepare_intents()` function.
-Currently this function creates `Intents` with message content privileged intent enabled:
+Currently, this function creates `Intents` with message content privileged intent enabled:
 
 ```python
 def _prepare_intents() -> Intents:
@@ -119,9 +119,9 @@ These commands are available when you start typing `/`.
 Uwuifying all messages is done through a webhook.
 When `all` command is executed a webhook is added to the channel.
 This new webhook will have the same name and avatar as the bot.
-Afterwards, when any message other than a command is send in this channel a uwuified version will be sent through this webhook.
+Afterward, when any message other than a command is sent in this channel an uwuified version will be sent through this webhook.
 This message will also have original author's name and avatar.
-Original message is removed.
+Original message will be removed.
 
 Decision whether to replace messages is done based on whether this webhook is present in channel.
 No persistent data is stored on bot side.
@@ -145,16 +145,16 @@ You can run the bot from source, or in a Docker container.
 ### From source
 
 1. Create a Discord bot
-1. Install all packages from `requirements.txt`
-1. Fill `default.env`, or `custom.env`, or `.env` or other custom configuration file
-1. Execute `src/main.py` via Python
+2. Install all packages from `requirements.txt`
+3. Fill `default.env`, or `custom.env`, or `.env` or other custom configuration file
+4. Execute `src/main.py` via Python
 
 
 ### Docker
 
 1. Create a Discord bot
-1. Fill `default.env` or `.env`
-1. Run `docker compose up -d --build` in terminal
+2. Fill `default.env` or `.env`
+3. Run `docker compose up -d --build` in terminal
 
 You can skip `--build` flag if you didn't change the source code.
 
@@ -162,7 +162,7 @@ No `.env` files are added to the Docker image, they are just used as a source fo
 So if you make any changes there, just restart the container.
 There's no need to rebuild the image.
 
-Docker Compose will by default load parameters from just `.env` file with highest priority.
+Docker Compose will by default load parameters from just `.env` file with the highest priority.
 So a file named exactly `.env` can also be used for source of parameters, without any changes to `docker-compose.yml` or other project files.
 
 You can also supply a custom `.env` by modifying `docker-compose.yml` and:

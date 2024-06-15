@@ -1,7 +1,7 @@
 """
 Event Cog handling all incoming messages.
 If webhook created by "all" command is present, then current message is removed
-and "improved" replacement is send with this user's name and avatar through the webhook.
+and "improved" replacement is sent with this user's name and avatar through the webhook.
 """
 
 from logging import getLogger
@@ -36,7 +36,7 @@ class OnMessage(Cog):
     def _modifiable(self, message: Message) -> bool:
         return message.guild and not message.webhook_id and message.author.id != self._bot.user.id
 
-    async def _try_get_webhook(self, message: Message) -> Webhook:
+    async def _try_get_webhook(self, message: Message) -> Webhook | None:
         try:
             return await get_webhook(message.channel, self._bot)
         except Forbidden:

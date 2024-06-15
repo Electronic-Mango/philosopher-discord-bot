@@ -2,7 +2,7 @@
 Module responsible for "improving" text.
 First any markdown characters are removed.
 Then text is uwuified.
-Finally all markdown characters are escaped.
+Finally, all markdown characters are escaped.
 Some faces contain markdown characters, so the final step is necessary.
 """
 
