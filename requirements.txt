@@ -1,4 +1,4 @@
-aiohttp~=3.9.5
+aiohttp>=3.10.2
 disnake~=2.9.2
 owoify-py~=2.1.0
 python-dotenv~=1.0.1
