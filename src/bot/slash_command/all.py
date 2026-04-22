@@ -13,7 +13,7 @@ it will send back an ephemeral error with this information.
 from logging import getLogger
 
 from disnake import CommandInteraction
-from disnake.ext.commands import Cog, bot_has_guild_permissions, slash_command
+from disnake.ext.commands import Cog, bot_has_guild_permissions, contexts, slash_command
 
 from bot.webhook import create_new_webhook, get_webhook, remove_webhook
 
@@ -29,7 +29,8 @@ class All(Cog):
         super().__init__()
         self._logger = getLogger(__name__)
 
-    @slash_command(name=_COMMAND_NAME, description=_COMMAND_DESCRIPTION, dm_permission=False)
+    @slash_command(name=_COMMAND_NAME, description=_COMMAND_DESCRIPTION)
+    @contexts(guild=True)
     @bot_has_guild_permissions(manage_webhooks=True, manage_messages=True)
     async def _all(self, interaction: CommandInteraction) -> None:
         await interaction.response.defer()
